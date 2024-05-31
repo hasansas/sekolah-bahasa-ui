@@ -9,7 +9,7 @@
   <div id="app">
     <v-app>
       <!-- info -->
-      <v-system-bar v-if="!isMobile" fixed height="48" color="#c1ff72">
+      <v-system-bar v-if="!isMobile" height="48" color="#c1ff72">
         <v-container class="d-flex align-center justify-center">
           <span class="title font-weight-bold black--text mr-4">Ikuti kelas GRATIS sekarang juga!</span>
           <v-btn text class="info-btn">
@@ -20,8 +20,8 @@
       </v-system-bar>
 
       <!-- Appbar -->
-      <v-app-bar :class="!isMobile?'mt-12':''" fixed color="white" flat tile :height="isMobile ? 64 : 80"
-        :max-height="isMobile ? 64 : 80">
+      <v-app-bar color="white" flat tile :height="isMobile ? 64 : 80" :max-height="isMobile ? 64 : 80"
+        style="position: sticky; top: 0;">
         <v-container class="fill-height py-0">
           <v-btn v-if="isMobile" class="ml-n4" icon @click.stop="drawer = !drawer">
             <v-icon>ri-menu-2-line</v-icon>
@@ -40,9 +40,27 @@
           <!-- menus -->
           <v-spacer></v-spacer>
           <div v-if="!isMobile">
-            <v-btn text rounded href="#program" class="toolbar-menu font-weight-bold">
-              Program
-            </v-btn>
+            <v-menu nudge-bottom="22" nudge-right="0" offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn text rounded class="toolbar-menu font-weight-bold" v-bind="attrs" v-on="on">
+                  Program
+                </v-btn>
+              </template>
+              <v-card tile>
+                <v-list width="280">
+                  <v-list-item-group>
+                    <v-list-item :href="item.to" v-for="(item, i) in menu.programs" :key="i">
+                      <v-list-item-content>
+                        <v-list-item-title
+                          class="subtitle-2 font-weight-bold text-wrap">{{item.name}}</v-list-item-title>
+                        <v-list-item-subtitle class="text-wrap">{{item.description}}</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-card>
+            </v-menu>
+
             <v-btn text rounded href="#aboutus" class="toolbar-menu font-weight-bold">
               About Us
             </v-btn>
@@ -149,17 +167,17 @@
           <v-container class="main-container">
             <v-row justify="center">
               <v-col cols="12" md="8" class="text-center">
-                <h3 class="heading primary--text" :class="isMobile ? 'headline' : 'display-2'">
+                <h3 class="heading-lead primary--text" :class="isMobile ? 'headline' : 'display-1'">
                   {{joinUs.heading}}
                 </h3>
-                <div class="title">
+                <div class="subtitle-1">
                   {{joinUs.description}}
                 </div>
               </v-col>
             </v-row>
             <v-row justify="center" class="mt-16">
-              <v-col cols="12" md="3" v-for="(item, index) in joinUs.items">
-                <v-card flat class="mb-8">
+              <v-col cols="12" md="3" v-for="(item, index) in joinUs.items" :key="index">
+                <v-card flat color="transparent" class="mb-8">
                   <div class="wrapper">
                     <span class="leading display-1">
                       0{{index+1}}
@@ -170,7 +188,7 @@
                       </v-avatar>
                     </div>
                   </div>
-                  <v-card-title class="d-block text-center">{{item.title}}</v-card-title>
+                  <v-card-title class="d-block text-center font-weight-bold">{{item.title}}</v-card-title>
                   <v-card-text class="text-center">{{item.description}}</v-card-text>
                 </v-card>
               </v-col>
@@ -199,43 +217,275 @@
         <!-- Placement Test Council -->
         <section>
           <v-container class="main-container">
-            <h3 class="heading primary--text text-center" :class="isMobile ? 'headline mb-8' : 'display-2 mb-16'">
-              CARA PLACEMENT TEST
+            <h3 class="heading-lead primary--text text-center mb-16" :class="isMobile ? 'headline' : 'display-1'">
+              Placement Test
             </h3>
             <v-row justify="center">
               <v-col cols="12" md="6" v-if="!isMobile">
                 <img src="./assets/img/placement_test/img.png" alt="placement_test" class="rounded-xl">
               </v-col>
               <v-col cols="12" md="6">
-                <v-card outlined rounded="xl" class="pa-8">
+                <!-- <div class="title font-weight-bold ml-8 mb-8">Cara Placement Test</div> -->
+                <v-timeline align-top dense>
+                  <v-timeline-item v-for="(item, index) in placementTest" :key="index" :color="item.color"
+                    :icon="item.icon" fill-dot>
+                    <div>
+                      <div class="font-weight-normal">
+                        <strong>{{item.name}}</strong>
+                      </div>
+                      <div>{{item.description}}</div>
+                    </div>
+                  </v-timeline-item>
+                </v-timeline>
+                <!-- <v-card outlined rounded="xl" class="pa-8">
                   <img src="./assets/img/placement_test/how_to.jpg" alt="placement_test">
+                </v-card> -->
+              </v-col>
+            </v-row>
+          </v-container>
+        </section>
+
+        <!-- Program-->
+        <section id="join-us" class="join-us">
+          <v-container class="main-container">
+            <v-row justify="center">
+              <v-col cols="12" md="8" class="text-center">
+                <h3 class="heading-lead secondary--text" :class="isMobile ? 'headline' : 'display-1'">
+                  Pilih Kursus Yang Sesuai
+                </h3>
+                <p class="subtitle-1">
+                  Pilihlah kursus dengan bijak dan mulailah
+                  perjalanan Anda menuju mahir berbahasa
+                  asing!
+                  <br />
+                  Kami berkomitmen untuk memberikan
+                  pengalaman pembelajaran yang memuaskan
+                  dan memastikan setiap peserta meraih
+                  kesuksesan dalam mencapai tujuan bahasa
+                  mereka
+                </p>
+              </v-col>
+            </v-row>
+            <v-row justify="center" class="mt-16">
+              <v-col cols="12" md="4" v-for="(item, index) in programs.items" :key="`program-${index}`" class="pa-6">
+                <v-card flat :color="item.color" dark class="d-flex flex-column fill-height rounded-xxl">
+                  <v-card flat>
+                    <v-img :src="item.image" :aspect-ratio="16/9"></v-img>
+                  </v-card>
+                  <v-card-title class="font-weight-bold px-6">
+                    {{item.name}}
+                  </v-card-title>
+                  <v-card-text class="flex-grow-1 white--text subtitle-1">
+                    <ul>
+                      <li v-for="(service, idx) in item.services" :key="`service-${idx}`" class="pl-2">
+                        {{service}}
+                      </li>
+                    </ul>
+                  </v-card-text>
+                  <v-card-actions class="pt-4 pb-8 px-8">
+                    <v-btn depressed rounded x-large block color="white">
+                      <span class="font-weight-bold" :style="`color:${item.color}`">Check yuk!</span>
+                    </v-btn>
+                  </v-card-actions>
                 </v-card>
               </v-col>
             </v-row>
           </v-container>
         </section>
 
-        <!-- About -->
-        <section id="about" class="about">
+        <!-- Testimonials -->
+        <section id="testimonial" class="testimonials parallax text-center">
           <v-container class="main-container">
             <v-row justify="center">
               <v-col cols="12" md="8" class="text-center">
-                <div class="heading-lead text-uppercase title">About</div>
-                <h3 class="font-weight-bold mb-16" :class="isMobile ? 'headline' : 'display-1'">
-                  Apa itu Sekolah Bahasa?
+                <h3 class="heading-lead primary--text" :class="isMobile ? 'headline' : 'display-1'">
+                  Apa Kata Mereka
                 </h3>
-                <v-card flat dark rounded="xl" width="700" color="#3F2179" class="mx-auto pa-8">
-                  Sekolah Bahasa adalah platform pembelajaran secara daring yang
-                  dapat diakses kapanpun dan dimanapun dengan memanfaatkan
-                  metodologi dan teknologi pengajaran modern melalui
-                  pembelajaran yang intensif, fleksibel dan mudah digunakan
-                  setiap hari oleh penggunanya
+                <p class="subtitle-1">
+                  Banyak dari alumni Sekolah Bahasa yang telah mendapatkan manfaat berlajar di sekolah bahasa, berikut
+                  salah satu testimoninya
+                </p>
+              </v-col>
+            </v-row>
+            <v-row class="mt-16 pt-16">
+              <v-col cols="12" md="4" v-for="(item, i) in testimonials" :key="`testimonial-${i}`" class="text-left">
+                <v-card flat dark color="#91dfb1" class="pt-16" :class="!isMobile ? 'fill-height' : ''">
+                  <v-avatar size="180" class="avatar">
+                    <v-img :aspect-ratio="1 / 1" :src="item.image" class="rounded-lg"></v-img>
+                  </v-avatar>
+                  <v-card-text class="white--text">
+                    <div class="text-center title font-weight-bold text-uppercase pt-8" style="line-height: 1">
+                      {{ item.name }}
+                    </div>
+                    <div class="text-center subtitle-1 font-weight-bold mb-4 black--text">
+                      {{ item.title }}
+                    </div>
+                    <div class="review mx-8 mt-16 mb-8">
+                      {{ item.review }}
+                    </div>
+                  </v-card-text>
                 </v-card>
               </v-col>
             </v-row>
           </v-container>
         </section>
+
+        <!-- team -->
+        <section id="team" class="team parallax team">
+          <v-container class="main-container">
+            <v-row justify="center">
+              <v-col cols="12" class="text-center">
+                <h3 class="heading-lead primary--text" :class="isMobile ? 'headline' : 'display-1'">
+                  Tim Pengajar
+                </h3>
+                <p class="subtitle-1">
+                  Pengajar kami akan siap membantu kamu untuk meraih score tertinggi !
+                </p>
+              </v-col>
+            </v-row>
+            <div class="pt-16">
+              <div class="text-center">
+                <carousel v-bind:per-page="1" v-bind:per-page-custom="[[480,3],[780,5]]" v-bind:autoplay="true"
+                  v-bind:loop="true" v-bind:pagination-enabled="false" class="text-center">
+                  <slide v-for="(item, i) in teams" :key="`team-${i}`">
+                    <v-card flat color="transparent">
+                      <v-card flat outlined width="180" rounded="lg" class="mx-auto">
+                        <v-img :aspect-ratio="1 / 1" :src="item.image" class="rounded-lg"></v-img>
+                      </v-card>
+                      <v-card-text>
+                        <div class="text-center title font-weight-bold mt-2 pt-4 black--text" style="line-height: 1">
+                          {{ item.name }}
+                        </div>
+                        <div class="text-center subtitle-1 mt-2 mb-4">
+                          {{ item.title }}
+                        </div>
+                      </v-card-text>
+                    </v-card>
+                  </slide>
+                </carousel>
+              </div>
+              <v-sheet color="transparent" class="d-flex justify-center">
+              </v-sheet>
+            </div>
+          </v-container>
+        </section>
       </v-main>
+
+      <!-- Footer -->
+      <v-footer dark>
+        <v-container class="main-container">
+          <section>
+            <v-row>
+              <v-col cols="12" lg="5" md="6" sm="6">
+                <div :class="!isMobile?'mr-16':''">
+                  <img src="./assets/img/site/logo-2.png" />
+                  <p class="my-8">
+                    2023 Sekolah Bahasa All Rights Reserved
+                    Sekolah Bahasa supporting 5 goals of SDG’s
+                    impact
+                  </p>
+                  <v-row>
+                    <v-col cols="4" class="pa-2 d-flex">
+                      <img src="./assets/img/img-f-1.jpg" />
+                    </v-col>
+                    <v-col cols="4" class="pa-2 d-flex">
+                      <img src="./assets/img/img-f-2.jpg" />
+                    </v-col>
+                    <v-col cols="4" class="pa-2 d-flex">
+                      <img src="./assets/img/img-f-3.jpg" />
+                    </v-col>
+                    <v-col cols="4" class="pa-2 d-flex">
+                      <img src="./assets/img/img-f-4.jpg" />
+                    </v-col>
+                    <v-col cols="4" class="pa-2 d-flex">
+                      <img src="./assets/img/img-f-5.jpg" />
+                    </v-col>
+                  </v-row>
+
+                  <div class="sosmed mt-16">
+                    <v-btn fab small outlined color="white" class="mr-2">
+                      <v-icon size="20">ri-instagram-line</v-icon>
+                    </v-btn>
+                    <v-btn fab small outlined color="white" class="mr-2">
+                      <v-icon size="20">ri-facebook-line</v-icon>
+                    </v-btn>
+                    <v-btn fab small outlined color="white" class="mr-2">
+                      <v-icon size="20">ri-twitter-line</v-icon>
+                    </v-btn>
+                    <v-btn fab small outlined color="white" class="mr-2">
+                      <v-icon size="20">ri-linkedin-line</v-icon>
+                    </v-btn>
+                  </div>
+                  <p class="mt-8">
+                    info@sekolahbahasa.com<br />
+                    +62 812-4600-0546<br />
+                    Jam Operasional : 08.00 - 20.00 WIB
+                  </p>
+                </div>
+              </v-col>
+              <v-col class="d-flex flex-column" cols="12" lg="3" md="6" sm="6">
+                <h3 class="headline font-weight-bold mt-0 mb-4 primary--text">Program</h3>
+                <template v-for="(item, index) in footer.programs">
+                  <a class="text-capitalize py-1 white--text" :key="`fp-${index}`" :to="item.url">
+                    {{ item.title.toLowerCase() }}
+                  </a>
+                  <ul v-if="item.children.length > 0">
+                    <li v-for="(child, idx) in item.children" class="pl-2">{{child}}</li>
+                  </ul>
+                </template>
+              </v-col>
+              <v-col class="d-flex flex-column" cols="12" lg="4" md="6" sm="6">
+                <h3 class="headline font-weight-bold mt-0 mb-4 secondary--text">
+                  Tentang Sekolah Bahasa
+                </h3>
+                <p>
+                  Tentang Kami<br />
+                  Karir - <span class="primary--text font-weight-bold">We’re Hiring!</span><br />
+                  Blog<br />
+                  Podcast<br />
+                  Pusat Bantuan<br />
+                  Join Club!
+                </p>
+
+                <h3 class="title font-weight-bold my-4 yellow--text">
+                  PT Asoetech Jancitra Indonesia (HQ)
+                </h3>
+                <p>
+                  Jl Kenanga No. 18/38, RT.01/RW.08<br />
+                  Pondok Pinang, Kebayoran Lama<br />
+                  Jakarta Selatan 12310
+                </p>
+
+                <h3 class="title font-weight-bold my-4 yellow--text">
+                  Branch Rembang
+                </h3>
+                <ul class="mb-4">
+                  <li>
+                    Jl. Padangan - Sedan, Krajan Gandrirejo
+                    (samping MA YSPIS Gandrirejo), Sedan,
+                    Rembang - Jawa Tengah
+                  </li>
+                  <li>
+                    PKBM Srikandi Mandiri
+                    Ds. Dresi Kulon, Kaliori, Rembang - Jawa Tengah
+                  </li>
+                </ul>
+
+                <h3 class="title font-weight-bold my-4 yellow--text">
+                  Branch Blora
+                </h3>
+                <p>
+                  Jl Tentara Pelajar no. 8, Kunden, Blora - Jawa Tengah
+                </p>
+              </v-col>
+            </v-row>
+          </section>
+          <v-divider dark class="my-4"></v-divider>
+          <p class="text-center ma-0 py-4">
+            © {{ footer.currentYear }} Sekolah Bahasa. All Rights Reserved.
+          </p>
+        </v-container>
+      </v-footer>
     </v-app>
   </div>
 
@@ -243,11 +493,17 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-carousel@0.18.0/dist/vue-carousel.min.js"></script>
+
 
   <script>
     new Vue({
       el: '#app',
       vuetify: new Vuetify(),
+      components: {
+        carousel: VueCarousel.Carousel,
+        slide: VueCarousel.Slide
+      },
       computed: {
         isMobile() {
           switch (this.$vuetify.breakpoint.name) {
@@ -268,6 +524,46 @@
         return {
           drawer: false,
           dialog: false,
+          menu: {
+            programs: [
+              {
+                name: 'General English',
+                description: 'Program untuk kamu yang masih pemula',
+                icon: '',
+                to: '/programs/general-english.html',
+              },
+              {
+                name: 'English Special Purposes',
+                description: 'Untuk kamu yang ingin belajar sesuai bidang pekerjaan saat ini',
+                icon: '',
+                to: '',
+              },
+              {
+                name: 'English Score Preparation',
+                description: 'Siapkan diri kamu untuk mendapatkan nilai terbaik',
+                icon: '',
+                to: '',
+              },
+              {
+                name: 'Conversation Class',
+                description: 'Makin mudah berkomunikasi dengan kelas special ini!',
+                icon: '',
+                to: '',
+              },
+              {
+                name: 'Self-Learning',
+                description: 'Belajar sendiri untukmemperbanyak info? Why not!',
+                icon: '',
+                to: '',
+              },
+              {
+                name: 'Pre-Test',
+                description: 'GRATIS Belajar sendiriuntuk memperbanyak info? Why not!',
+                icon: '',
+                to: '',
+              }
+            ]
+          },
           hero: {
             text: {
               leading: 'Mau Pede Ngomong Pake Bahasa Asing ?',
@@ -279,7 +575,7 @@
             }
           },
           joinUs: {
-            heading: 'BELAJAR DI SEKOLAH BAHASA',
+            heading: 'Belajar di Sekolah Bahasa',
             description: 'Bergabunglah dengan kami di Sekolah Bahasa dan hadapi perjalanan bahasa Anda dengan percaya diri.Pilih layanan yang sesuai dengan kebutuhan Anda dan raih kemampuan bahasa yang Anda impikan!',
             items: [
               {
@@ -313,7 +609,240 @@
                 image: './assets/img/join_us/05.png'
               }
             ]
-          }
+          },
+          programs: {
+            items: [
+              {
+                name: "REGULAR CLASS",
+                image:
+                  "./assets/img/programs/img-1.png",
+                services: [
+                  'Online Learning 2 jam / minggu',
+                  'Group Discussion 9 jam / minggu',
+                  'max 25 orang / class'
+                ],
+                color: '#ef6602'
+              },
+              {
+                name: "SMALL CLASS",
+                image:
+                  "./assets/img/programs/img-2.png",
+                services: [
+                  'Online Learning 4 jam / minggu',
+                  'Group Discussion 12 jam / minggu',
+                  'max 10 orang / class'
+                ],
+                color: '#72bd47'
+              },
+              {
+                name: "CONVO",
+                image:
+                  "./assets/img/programs/img-3.png",
+                services: [
+                  'Online Learning 2 jam / minggu',
+                  'Group Discussion 9 jam / minggu',
+                  '30 menit daily conversation',
+                  'max 20 orang / class'
+                ],
+                color: '#63b1db'
+              },
+              {
+                name: "SELF LEARNING",
+                image:
+                  "./assets/img/programs/img-4.png",
+                services: [
+                  'Unlimited online learning access',
+                  'unlimited handbook access',
+                  'unlimited scoring tes'
+                ],
+                color: '#6b6972'
+              },
+              {
+                name: "PRIVATE CONVO",
+                image:
+                  "./assets/img/programs/img-5.png",
+                services: [
+                  'Online Learning 4 jam / minggu',
+                  'Group Discussion 12 jam / minggu',
+                  '30 menit daily conversation',
+                  'max 2 orang / class'
+                ],
+                color: '#ff8db3'
+              },
+              {
+                name: "PRIVATE",
+                image:
+                  "./assets/img/programs/img-6.png",
+                services: [
+                  'Online Learning 4 jam / minggu',
+                  'Group Discussion 12 jam / minggu',
+                  'max 2 orang / class'
+                ],
+                color: '#c197d2'
+              },
+            ]
+          },
+          testimonials: [
+            {
+              image:
+                "http://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/5d3eab0ebb2c71d2948299f3669ede74.jpg/s/500x/a/593799/sc/256",
+              name: "Ratna Kartika",
+              title: "Pemilik Guest House Kendari",
+              review:
+                "Sekolah Bahasa membantu saya untuk mneingkatkan kepercayaan diri saya untuk berkomunikasi dengan tamu-tamu dari luar negeri"
+            },
+            {
+              image:
+                "http://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/af37d1b38cd087d4fc717f1a2d95b793.jpg/s/500x/a/593799/sc/250",
+              name: "Fani Eliza Kemala",
+              title: "Tour Guide Lampung",
+              review:
+                "Kenapa tidak dari dulu ada metode belajar seperti di Sekolah Bahasa??",
+            },
+            {
+              image:
+                "http://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/c4c88fd4d18606910e5fe1af6e09fa2e.jpg/s/500x/a/593799/sc/298",
+              name: "Nesa Rudianisa",
+              title: "Mahasiswa Keperawatan Yatsi Madani",
+              review:
+                "Suka lupa waktu kalo Miss Hening yang menjelaskan di kelas. Karena sesuka itu sama Miss Hening",
+            },
+          ],
+          teams: [
+            {
+              image: "./assets/img/team/regina.png",
+              name: "Miss Regina",
+              title: "Tutor English Special Purposes",
+            },
+            {
+              image: "./assets/img/team/fiqa.png",
+              name: "Miss Fiqa",
+              title: "Tutor EILTS Preparation",
+            },
+            {
+              image: "./assets/img/team/tita.png",
+              name: "Miss Tita",
+              title: "Tutor English Special Purposes",
+            },
+            {
+              image: "./assets/img/team/hening.png",
+              name: "Miss Hening",
+              title: "Tutor General English",
+            },
+            {
+              image: "./assets/img/team/ogie.png",
+              name: "Mr Ogie",
+              title: "Tutor EILTS Preparation",
+            },
+          ],
+          placementTest: [
+            {
+              name: "Placement test",
+              description: 'Kerjakan test untuk mengetahui level skill anda',
+              icon: "ri-quill-pen-line",
+              color: "red",
+            },
+            {
+              name: "Registrasi",
+              description: 'Bikin akun di Sekolah Bahasa untuk mulai berlangganan',
+              icon: "ri-user-received-2-line",
+              color: "orange",
+            },
+            {
+              name: "Berlangganan",
+              description: 'Pilih layanan yang sesuai dengan kebutuhan anda',
+              icon: "ri-shopping-bag-3-line",
+              color: "purple",
+            },
+            {
+              name: "Konfirmasi pembayaran",
+              description: 'Lakukan pembayaran untuk program yang anda pilih',
+              icon: "ri-shield-check-line",
+              color: "blue",
+            },
+            {
+              name: "Mulai Belajar",
+              description: 'Mulailah perjalanan Anda menuju mahir berbahasa asing!',
+              icon: "ri-movie-line",
+              color: "green",
+            },
+          ],
+          footer: {
+            programs: [
+              {
+                title: "Bahasa Inggris",
+                url: "#",
+                children: []
+              },
+              {
+                title: "Bahasa Korea(coming soon)",
+                url: "#",
+                children: []
+              },
+              {
+                title: "Bahasa Jepang(coming soon)",
+                url: "#",
+                children: []
+              },
+              {
+                title: "Bahasa Mandarin(coming soon)",
+                url: "#",
+                children: []
+              },
+              {
+                title: "General English",
+                url: "#",
+                children: [
+                  'Beginner',
+                  'Intermediate',
+                  'Advance'
+                ]
+              },
+              {
+                title: "English Special Purposes",
+                url: "#",
+                children: [
+                  'Tourism',
+                  'Hospitality',
+                  'Customer Services',
+                  'Nursing',
+                  'Farmacy',
+                ]
+              },
+              {
+                title: "English Score Preparation",
+                url: "#",
+                children: []
+              },
+              {
+                title: "English Score + Conversation Preparaion",
+                url: "#",
+                children: []
+              },
+            ],
+            office: [
+              {
+                value: "PT. Asoetech Jancitra Indonesia",
+                icon: "ri-building-line",
+              },
+              {
+                value:
+                  "Jl. Kenanga No. 18/38, RT.1/RW.8<br/>" +
+                  "Pondok Pinang, Kebayoran Lama<br/>" +
+                  "Jakarta Selatan 12310",
+                icon: "ri-map-pin-2-line",
+              },
+              {
+                value: "+62 812-4600-0546",
+                icon: "ri-phone-line",
+              },
+              {
+                value: "www.sebabisa.com",
+                icon: "ri-links-line",
+              },
+            ],
+            currentYear: new Date().getFullYear(),
+          },
         }
       }
     })
