@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;900&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css");
 @import url("https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css");
-@import url('https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.min.css');
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 /* Typography */
@@ -131,16 +131,6 @@ body {
   width: 0;
 }
 
-.v-application .v-main {
-  margin-top: 64px;
-}
-
-@media screen and (min-width: 992px) {
-  .v-application .v-main {
-    margin-top: 80px;
-  }
-}
-
 .v-application .text-h1,
 .v-application .text-h2,
 .v-application .text-h3,
@@ -235,6 +225,10 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 
+.v-toolbar {
+  z-index: 1000;
+}
+
 .v-toolbar .brand-logo {
   margin-top: 4px;
 }
@@ -278,7 +272,6 @@ section {
 
 section .heading {
   font-weight: bold !important;
-  text-transform: uppercase;
   margin-bottom: 32px
 }
 
@@ -287,6 +280,8 @@ section .heading-lead {
   letter-spacing: 0.2rem !important;
   position: relative;
   margin-bottom: 32px;
+  padding-bottom: 16px;
+  text-transform: uppercase;
 }
 
 section .heading-lead:before {
@@ -295,21 +290,13 @@ section .heading-lead:before {
   background-color: #9a9a9a;
   width: 40px;
   height: 1px;
-  top: 40px;
+  bottom: 0;
   left: 50%;
   margin-left: -20px;
 }
 
-section .heading-lead.primary--text {
-  color: #73be48;
-}
-
 section .heading-lead.primary--text:before {
   background-color: #73be48;
-}
-
-section .heading-lead.secondary--text {
-  color: #f4a340;
 }
 
 section .heading-lead.secondary--text:before {
@@ -445,15 +432,24 @@ section .f-image img {
 }
 
 /* Hero */
-.hero {
+.hero,
+.hero-2 {
   padding-top: 0;
   position: relative;
   z-index: 1;
-  background-image: url('../img/hero/hero-bg.png');
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: auto 100%;
   height: calc(100vh - 64px);
+}
+
+.hero {
+  background-image: url('../img/hero/hero-bg.png');
+}
+
+.hero-2 {
+  background-image: url('../img/hero/hero-bg-2.png');
+  background-position: right bottom;
 }
 
 .stroke-1,
@@ -481,7 +477,7 @@ section .f-image img {
 
 @media screen and (min-width: 992px) {
   .hero {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 120px);
     background-position: right bottom;
   }
 }
@@ -557,36 +553,30 @@ section .f-image img {
   margin-left: calc(50% - 112px);
 }
 
-/* About */
-section.about {
-  background-image: url('https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/0c8a9129b251e9abaae824568d895fdc.png/s/s2000x/a/593799/sc/251');
-}
-
 /* Testimonials */
-section.testimonials {
-  background-image: url('https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/956ade83b76611113a5bebe5a1c21f47.png/s/s2000x/a/593799/sc/183');
-}
-
 section.testimonials .v-card {
   margin-bottom: 92px;
+  border-radius: 30% 30% 8px 8px;
 }
 
 section.testimonials .avatar {
   position: absolute;
-  top: -75px;
-  left: calc(50% - 75px);
+  top: -90px;
+  left: calc(50% - 90px);
 }
 
 section.testimonials .review {
   position: relative;
+  color: black
 }
 
 section.testimonials .review:before {
   position: absolute;
   content: "“";
-  font-size: 50px;
+  font-size: 72px;
   top: -12px;
   left: -22px;
+  color: white
 }
 
 @media screen and (min-width: 992px) {
@@ -595,14 +585,9 @@ section.testimonials .review:before {
   }
 }
 
-/* Team */
-section.team {
-  background-image: url('https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/0c8a9129b251e9abaae824568d895fdc.png/s/s2000x/a/593799/sc/251');
-}
-
 /* Footer */
 footer {
-  background: #212044 !important;
+  background: #122b51 !important;
 }
 
 footer .brand-logo img {
@@ -629,4 +614,56 @@ footer .brand-logo img {
   position: absolute;
   bottom: 24px;
   left: 24px;
+}
+
+.card-info {
+  border-radius: 32px !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-info>div {
+  position: relative;
+  z-index: 2;
+}
+
+.card-info:before {
+  position: absolute;
+  content: '';
+  height: 200px;
+  width: 200px;
+  border-radius: 64px;
+  background-color: rgba(0, 0, 0, 0.1);
+  top: -64px;
+  right: -100px;
+  z-index: 1;
+}
+
+.card-info:after {
+  position: absolute;
+  content: '';
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.1);
+  bottom: -100px;
+  left: -100px;
+  z-index: 1;
+}
+
+/* Misc */
+.v-parallax__content {
+  padding: 0 !important;
+}
+
+.text-wrap {
+  white-space: wrap !important;
+}
+
+ul.list {
+  line-height: 1.2 !important;
+}
+
+ul.list li {
+  margin-bottom: 8px;
 }
