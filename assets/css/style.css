@@ -436,7 +436,8 @@ section .f-image img {
 .hero-2,
 .hero-3,
 .hero-4,
-.hero-5 {
+.hero-5,
+.hero-6 {
   padding-top: 0;
   position: relative;
   z-index: 1;
@@ -462,6 +463,16 @@ section .f-image img {
 
 .hero-4 {
   background-image: url('../img/programs/ebglish_score_preparation/hero-bg.png ');
+  background-position: right bottom;
+}
+
+.hero-5 {
+  background-image: url('../img/hero-5.png ');
+  background-position: right bottom;
+}
+
+.hero-6 {
+  background-image: url('../img/hero-6.png ');
   background-position: right bottom;
 }
 
