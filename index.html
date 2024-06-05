@@ -40,6 +40,9 @@
           <!-- menus -->
           <v-spacer></v-spacer>
           <div v-if="!isMobile">
+            <v-btn text rounded href="/" class="toolbar-menu font-weight-bold">
+              Home
+            </v-btn>
             <v-menu nudge-bottom="22" nudge-right="0" offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn text rounded class="toolbar-menu font-weight-bold" v-bind="attrs" v-on="on">
@@ -141,17 +144,17 @@
                   {{hero.text.leading}}
                 </h5>
                 <h3 :class="isMobile ? 'display-1' : 'display-3'">
-                  <span class="stroke-2 d-inline-block mb-4" :data-text="hero.text.heading.first">
+                  <span class="stroke-strong d-inline-block mb-4" :data-text="hero.text.heading.first">
                     {{hero.text.heading.first}}
                   </span>
-                  <span class="stroke-2 d-inline-block font-weight-bold" :data-text="hero.text.heading.last">
+                  <span class="stroke-strong d-inline-block font-weight-bold" :data-text="hero.text.heading.last">
                     {{hero.text.heading.last}}
                   </span>
                 </h3>
-                <p class="stroke-1 title mt-8" :data-text="hero.text.description">
+                <p class="stroke title mt-8" :data-text="hero.text.description">
                   {{hero.text.description}}
                 </p>
-                <div class="mt-12" :class="!isMobile ? 'text-right' : ''">
+                <div class="mt-12">
                   <v-btn depressed rounded :x-large="!isMobile" :large="isMobile" color="secondary">
                     <span class="mr-4 text-uppercase font-weight-bold">Temukan Kelas Pilihamu</span>
                     <v-icon size="20">ri-arrow-right-line</v-icon>
@@ -214,7 +217,7 @@
           </v-card>
         </v-container>
 
-        <!-- Placement Test Council -->
+        <!-- Placement Test -->
         <section>
           <v-container class="main-container">
             <h3 class="heading-lead primary--text text-center mb-16" :class="isMobile ? 'headline' : 'display-1'">
@@ -225,7 +228,6 @@
                 <img src="./assets/img/placement_test/img.png" alt="placement_test" class="rounded-xl">
               </v-col>
               <v-col cols="12" md="6">
-                <!-- <div class="title font-weight-bold ml-8 mb-8">Cara Placement Test</div> -->
                 <v-timeline align-top dense>
                   <v-timeline-item v-for="(item, index) in placementTest" :key="index" :color="item.color"
                     :icon="item.icon" fill-dot>
@@ -237,9 +239,6 @@
                     </div>
                   </v-timeline-item>
                 </v-timeline>
-                <!-- <v-card outlined rounded="xl" class="pa-8">
-                  <img src="./assets/img/placement_test/how_to.jpg" alt="placement_test">
-                </v-card> -->
               </v-col>
             </v-row>
           </v-container>
@@ -310,7 +309,7 @@
             <v-row class="mt-16 pt-16">
               <v-col cols="12" md="4" v-for="(item, i) in testimonials" :key="`testimonial-${i}`" class="text-left">
                 <v-card flat dark color="#91dfb1" class="pt-16" :class="!isMobile ? 'fill-height' : ''">
-                  <v-avatar size="180" class="avatar">
+                  <v-avatar size="180" color="grey lighten-3" class="avatar">
                     <v-img :aspect-ratio="1 / 1" :src="item.image" class="rounded-lg"></v-img>
                   </v-avatar>
                   <v-card-text class="white--text">
@@ -380,9 +379,7 @@
                 <div :class="!isMobile?'mr-16':''">
                   <img src="./assets/img/site/logo-2.png" />
                   <p class="my-8">
-                    2023 Sekolah Bahasa All Rights Reserved
-                    Sekolah Bahasa supporting 5 goals of SDG’s
-                    impact
+                    Sekolah Bahasa supporting 5 goals of SDG’s impact
                   </p>
                   <v-row>
                     <v-col cols="4" class="pa-2 d-flex">
@@ -536,25 +533,25 @@
                 name: 'English Special Purposes',
                 description: 'Untuk kamu yang ingin belajar sesuai bidang pekerjaan saat ini',
                 icon: '',
-                to: '',
+                to: '/programs/english-special-purposes.html',
               },
               {
                 name: 'English Score Preparation',
                 description: 'Siapkan diri kamu untuk mendapatkan nilai terbaik',
                 icon: '',
-                to: '',
+                to: '/programs/english-score-preparation.html',
               },
               {
                 name: 'Conversation Class',
                 description: 'Makin mudah berkomunikasi dengan kelas special ini!',
                 icon: '',
-                to: '',
+                to: '/programs/conversation-class.html',
               },
               {
                 name: 'Self-Learning',
                 description: 'Belajar sendiri untukmemperbanyak info? Why not!',
                 icon: '',
-                to: '',
+                to: '/programs/self-learning.html',
               },
               {
                 name: 'Pre-Test',

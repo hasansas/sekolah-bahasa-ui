@@ -433,14 +433,17 @@ section .f-image img {
 
 /* Hero */
 .hero,
-.hero-2 {
+.hero-2,
+.hero-3,
+.hero-4,
+.hero-5 {
   padding-top: 0;
   position: relative;
   z-index: 1;
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: auto 100%;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 120px);
 }
 
 .hero {
@@ -452,27 +455,50 @@ section .f-image img {
   background-position: right bottom;
 }
 
-.stroke-1,
-.stroke-2 {
-  position: relative;
-  -webkit-text-stroke-color: #fff;
+.hero-3 {
+  background-image: url('../img/programs/english_special_purposes/img-1.png ');
+  background-position: right bottom;
 }
 
-.stroke-1 {
-  -webkit-text-stroke-width: 6px;
+.hero-4 {
+  background-image: url('../img/programs/ebglish_score_preparation/hero-bg.png ');
+  background-position: right bottom;
 }
 
-.stroke-2 {
-  -webkit-text-stroke-width: 8px;
+.stroke {
+  text-shadow:
+    -2px -2px 0 rgba(255, 255, 255, 0.7),
+    0 -2px 0 rgba(255, 255, 255, 0.7),
+    2px -2px 0 rgba(255, 255, 255, 0.7),
+    2px 0 0 rgba(255, 255, 255, 0.7),
+    2px 2px 0 rgba(255, 255, 255, 0.7),
+    0 2px 0 rgba(255, 255, 255, 0.7),
+    -2px 2px 0 rgba(255, 255, 255, 0.7),
+    -2px 0 0 rgba(255, 255, 255, 0.7);
 }
 
-.stroke-1:after,
-.stroke-2:after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  -webkit-text-stroke: 0 rgba(255, 255, 255, 0);
+.stroke-light {
+  text-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.7),
+    0 -1px 0 rgba(255, 255, 255, 0.7),
+    1px -1px 0 rgba(255, 255, 255, 0.7),
+    1px 0 0 rgba(255, 255, 255, 0.7),
+    1px 1px 0 rgba(255, 255, 255, 0.7),
+    0 1px 0 rgba(255, 255, 255, 0.7),
+    -1px 1px 0 rgba(255, 255, 255, 0.7),
+    -1px 0 0 rgba(255, 255, 255, 0.7);
+}
+
+.stroke-strong {
+  text-shadow:
+    -4px -4px 0 rgba(255, 255, 255, 0.7),
+    0 -4px 0 rgba(255, 255, 255, 0.7),
+    4px -4px 0 rgba(255, 255, 255, 0.7),
+    4px 0 0 rgba(255, 255, 255, 0.7),
+    4px 4px 0 rgba(255, 255, 255, 0.7),
+    0 4px 0 rgba(255, 255, 255, 0.7),
+    -4px 4px 0 rgba(255, 255, 255, 0.7),
+    -4px 0 0 rgba(255, 255, 255, 0.7);
 }
 
 @media screen and (min-width: 992px) {
@@ -640,6 +666,44 @@ footer .brand-logo img {
 }
 
 .card-info:after {
+  position: absolute;
+  content: '';
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.1);
+  bottom: -100px;
+  left: -100px;
+  z-index: 1;
+}
+
+.team-card-container {
+  position: relative;
+
+}
+
+.team-card-container .team-title {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: -32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.team-card-container .team-title:before {
+  position: absolute;
+  content: '';
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.1);
+  top: -50px;
+  right: -50px;
+  z-index: 1;
+}
+
+.team-card-container .team-title:after {
   position: absolute;
   content: '';
   height: 200px;
