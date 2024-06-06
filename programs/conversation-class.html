@@ -178,8 +178,8 @@
               <v-row>
                 <v-col cols="12" md="3" v-for="(item, index) in whyUs" :key="index">
                   <v-card outlined rounded="xl" class="py-4 px-2 fill-height">
-                    <v-card-text class="pb-0 text-center">
-                      <v-icon size="32" color="black">{{ item.icon }}</v-icon>
+                    <v-card-text class="pb-0 mb-4 text-center">
+                      <v-icon size="64" color="black">{{ item.icon }}</v-icon>
                     </v-card-text>
                     <v-card-title class="subtitle-1 font-weight-bold mb-1 d-block text-center">
                       {{ item.title }}
@@ -513,19 +513,19 @@
           whyUs: [
             {
               title: "Materi Terkini",
-              icon: "ri-wallet-line",
+              icon: "ri-refresh-line",
             },
             {
               title: "Flexible",
-              icon: "ri-shield-check-line",
-            },
-            {
-              title: "Tutor Pengalaman",
               icon: "ri-puzzle-2-line",
             },
             {
+              title: "Tutor Pengalaman",
+              icon: "ri-user-voice-line",
+            },
+            {
               title: "Interaksi Menyenangkan",
-              icon: "ri-links-line",
+              icon: "ri-chat-smile-2-line",
             },
           ],
           selfLearning: [
